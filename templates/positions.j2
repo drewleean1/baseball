@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block title %}Positions{% endblock %}
+
+{% block content %}
+
+<h2>Positions</h2>
+
+<hr class="section-divider">
+
+<p>
+    These are the standard positions for a baseball team. The position_id's also represent
+    the actual number (1-9) used for scoring purposes in baseball.
+</p>
+
+<table border="1" cellpadding="5"> 
+    {# this is code adapted from the flask starter app #}
+
+    {% if data %}
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        {% endfor %} 
+            </tr>
+
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+
+                    <td> {{item[key]}} </td> 
+                    {% endfor %}
+
+                    <td>
+                        <a href="edit_position/{{item.position_id}}" 
+                            <button class="btn btn-info btn-sm">Edit</button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="/delete_position/{{item.position_id}}" onclick="return confirm('Are you sure you wish to delete?');"
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </a>
+                    </td>
+                
+                </tr> 
+            {% endfor %} 
+    {% endif %}
+
+</table>
+
+<hr class="section-divider">
+
+<h4> Add New Position </h4>
+
+<form method="post" id="create_position">
+    <label for="position_id_input">Position ID</label>
+    <input name="position_id_input" id="position_id_input" required> 
+
+    <label for='position_input'>Position Name</label>
+    <input name='position_input' id="position_input">
+
+   <input type="submit" value="add_position" name="add_position"> 
+
+</form>
+
+<hr class="section-divider">
+
+<a href="{{ url_for('views.players_positions') }}" >
+    <button class="btn btn-info btn-lg">Players' Positions</button>
+</a>
+<hr class="section-divider">
+
+{% endblock %}

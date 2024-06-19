@@ -1,0 +1,90 @@
+{% extends "base.html" %} {% block title %}Trades{% endblock %}
+
+{% block content %}
+
+<br></br>
+
+<h2> Trades </h2>
+
+<table border="1" cellpadding="5"> 
+    {# this is code adapted from the flask starter app #}
+
+    Making a trade will edit the players to their new teams. Deleting a trade will revert players to their original teams. 
+    {% if data %}
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        {% endfor %} 
+            </tr>
+
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+
+                    <td> {{item[key]}} </td> 
+                    {% endfor %}
+                    <td>
+                        <a href="edit_trade/{{item.trade_id}}"
+                            <button class="btn btn-info btn-sm">Edit</button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="/delete_trade/{{item.trade_id}}" onclick="return confirm('Are you sure you wish to delete?');" 
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </a>
+                    </td>
+
+                </tr> 
+            {% endfor %} 
+    {% endif %}
+
+</table>
+
+<hr class="section-divider">
+
+<form method="post" id="add_trade">
+    <label for="trade_date_input">Date of trade</label>
+    <input type=date name="trade_date_input" id="position_id_input" required> 
+
+    <label for="team1_input">Team 1</label>
+    <select name="team1_input" id="team1_input">]
+        <option disabled selected value> --- </option> 
+        {% for item in teams %}
+        <option value={{item['team_id']}}>{{item['name']}}</option> 
+        {% endfor %}
+    </select>
+
+    <label for="player1_input">Player 1</label>
+    <select name="player1_input" id="player1_input">
+        <option disabled selected value> --- </option> 
+        {% for item in players %}
+        <option value={{item['player_id']}}>{{item['name']}}</option> 
+        {% endfor %}
+    </select>   
+
+    <label for="team2_input">Team 2</label>
+    <select name="team2_input" id="team2_input">
+        <option disabled selected value> --- </option> 
+        {% for item in teams %}
+        <option value={{item['team_id']}}>{{item['name']}}</option> 
+        {% endfor %}
+    </select>
+
+    <label for="player2_input">Player 2</label>
+    <select name="player2_input" id="player2_input">
+        <option disabled selected value> --- </option> 
+        {% for item in players %}
+        <option value={{item['player_id']}}>{{item['name']}}</option> 
+        {% endfor %}
+    </select>   
+
+   <input type="submit" value="Add Trade" name='add_trade'> 
+
+</form>
+
+
+<hr class="section-divider">
+{% endblock %}

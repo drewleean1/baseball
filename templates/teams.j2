@@ -1,0 +1,83 @@
+{% extends "base.html" %} {% block title %}Teams{% endblock %}
+
+{% block content %}
+
+<h2>Teams</h2>
+
+<hr class="section-divider">
+
+<p>
+    Below is the list of all the teams in the league which also includes their
+    mascot and home field.
+</p>
+
+<p>
+    To edit a team simply click on the edit button which will load the team's information
+    for editing. 
+</p>
+
+<p>
+    If you wish to delete a team from the database, click the delete button.
+</p>
+
+<p>
+    And if you wish to add a new team to the league, the form to do so is at the bottom of the page.
+</p>
+
+
+<table border="1" cellpadding="5"> 
+    {# this is code adapted from the flask starter app #}
+    {% if data %}
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        {% endfor %} 
+            </tr>
+
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+
+                    <td> {{item[key]}} </td> 
+                    {% endfor %}
+                    <td>
+                        <a href="edit_team/{{item.team_id}}"
+                            <button class="btn btn-info btn-sm">Edit</button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="/delete_team/{{item.team_id}}" onclick="return confirm('Are you sure you wish to delete?');" 
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </a>
+                    </td>
+
+                </tr> 
+            {% endfor %} 
+    {% endif %}
+
+</table>
+
+<hr class="section-divider">
+
+<h4> Add New Team</h4>
+
+<form method="post" id="create_team">
+    <label for="team_name_input">Name</label>
+    <input name="team_name_input" id="team_name_input" required> 
+
+    <label for='mascot_input'>Mascot</label>
+    <input name='mascot_input' id="mascot_input">
+
+    <label for='home_field_input'>Home field</label>
+    <input name='home_field_input' id="home_field_input">
+
+   <input type="submit" value="Add Team" name="add_team"> 
+
+</form>
+
+<hr class="section-divider">
+
+{% endblock %}

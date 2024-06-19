@@ -1,0 +1,33 @@
+{% extends "base.html" %} {% block title %}Edit Player{% endblock %}
+
+{% block content %}
+
+{# this is code adapted from the flask starter app #}
+
+<form method="POST" id="edit_players_position">
+    <label for="player_input">Player</label>
+    <select name="player_input" id="player_input">
+        {% for item in players %}
+            {% if item['name'] == data[0]['name']%} 
+                <option value="{{item['player_id']}}" selected>{{item['name']}}</option> 
+            {%else%}
+                <option value="{{item['player_id']}}">{{item['name']}}</option>
+            {%endif%}
+        {% endfor %}
+    </select>
+
+    <label for="position_input">Position</label>
+    <select name="position_input" id="position_input">
+        {% for item in positions %}
+            {% if item['position'] == data[0]['position']%} 
+                <option value="{{item['position_id']}}" selected>{{item['position']}}</option> 
+            {%else%}
+                <option value="{{item['position_id']}}">{{item['position']}}</option>
+            {%endif%}
+        {% endfor %}
+    </select>
+
+   <input type="submit" value="Submit Edit" name="edit_players_position"> 
+
+</form>
+{% endblock %}

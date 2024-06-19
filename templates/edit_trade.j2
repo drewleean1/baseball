@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %}Edit Trade{% endblock %}
+
+{% block content %}
+
+{# this is code adapted from the flask starter app #}
+<form method="post" id="edit_trade">
+    <label for="trade_date_input">Date of trade</label>
+    <input type=date name="trade_date_input" id="position_id_input" value="{{data[0]['trade_date']}}" required> 
+
+    <label for="team1_input">Team 1</label>
+    <select name="team1_input" id="team1_input">]
+        {% for item in teams %}
+            {% if item['name'] == pr[0]['Team_1']%} 
+                <option value="{{item['team_id']}}" selected>{{item['name']}}</option> 
+            {%else%}
+                <option value="{{item['team_id']}}">{{item['name']}}</option>
+            {%endif%}
+        {% endfor %}
+    </select>
+
+    <label for="player1_input">Player 1</label>
+    <select name="player1_input" id="player1_input">
+        {% for item in players %}
+            {% if item['name'] == pr[0]['Player_1']%} 
+                <option value="{{item['player_id']}}" selected>{{item['name']}}</option> 
+            {%else%}
+                <option value="{{item['player_id']}}">{{item['name']}}</option>
+            {%endif%}
+        {% endfor %}
+    </select>   
+
+    <label for="team2_input">Team 2</label>
+    <select name="team2_input" id="team2_input">
+        {% for item in teams %}
+            {% if item['name'] == pr[0]['Team_2']%} 
+                <option value="{{item['team_id']}}" selected>{{item['name']}}</option> 
+            {%else%}
+                <option value="{{item['team_id']}}">{{item['name']}}</option>
+            {%endif%}
+        {% endfor %}    
+    </select>
+
+    <label for="player2_input">Player 2</label>
+    <select name="player2_input" id="player2_input">
+        {% for item in players %}
+            {% if item['name'] == pr[0]['Player_2']%} 
+                <option value="{{item['player_id']}}" selected>{{item['name']}}</option> 
+            {%else%}
+                <option value="{{item['player_id']}}">{{item['name']}}</option>
+            {%endif%}
+        {% endfor %}
+    </select>
+
+   <input type="submit" value="edit_trade" name='edit_trade'> 
+
+</form>
+{% endblock %}

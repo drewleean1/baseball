@@ -1,0 +1,103 @@
+{% extends "base.html" %} {% block title %}Players{% endblock %}
+
+{% block content %}
+
+
+<h2>Players</h2>
+
+<hr class="section-divider">
+
+<p>
+    Below is the list of all the players and their stats for each skill.
+</p>
+
+<p>
+    The players are graded on a scale from 1-10 with 1 being poor and 
+    10 being outstanding. 
+</p>
+
+<p>
+    To edit a player simply click on the edit button which will load the player's information
+    for editing. 
+</p>
+
+<p>
+    If you wish to delete a player from the database, click the delete button.
+</p>
+
+<p>
+    And if you wish to add a new player to the league, the form to do so is at the bottom of the page.
+</p>
+
+<table border="1" cellpadding="5"> 
+    {# this is code adapted from the flask starter app #}
+    {% if data %}
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        {% endfor %} 
+            </tr>
+
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+
+                    <td> {{item[key]}} </td> 
+                    {% endfor %}
+                    <td>
+                        <a href="/edit_player/{{item.player_id}}" 
+                            <button class="btn btn-info btn-sm">Edit</button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="/delete_player/{{item.player_id}}" onclick="return confirm('Are you sure you wish to delete?');" 
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </a>
+                    </td>
+
+                </tr> 
+            {% endfor %} 
+    {% endif %}
+
+</table>
+
+<hr class="section-divider">
+
+<h4> Add New Player</h4>
+
+<form method="post" id="create_player">
+    <label for="player_name_input">Name</label>
+    <input name="player_name_input" id="player_name_input" required> 
+
+    <label for="birthdate_input">Birth Date</label>
+    <input type="date" name="birthdate_input" id="birthdate_input" required> 
+
+    <label for='batting_input'>Batting (1-10)</label>
+    <input name='batting_input' id="batting_input" required>
+
+    <label for='fielding_input'>Fielding (1-10)</label>
+    <input name='fielding_input' id="fielding_input" required>
+
+    <label for='running_input'>Running (1-10)</label>
+    <input name='running_input' id="running_input" required>
+
+    <label for='pitching_input'>Pitching (1-10)</label>
+    <input name='pitching_input' id="pitching_input" required>
+
+    <label for="team_input">Team</label>
+    <select name="team_input" id="team_input">
+        {% for item in teams %}
+        <option value="{{item['team_id']}}">{{item['name']}}</option> 
+        {% endfor %}
+    </select>
+
+   <input type="submit" value="Add Player" name="add_player"> 
+
+</form>
+
+<hr class="section-divider">
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% block title %}Players' positions{% endblock %}
+
+{% block content %}
+
+
+<h2>Players' Positions</h2>
+
+<hr class="section-divider">
+
+<p> 
+    Here is a list of all the players and the position that they play.
+    If you would like to associate a new position with a player, you may
+    fill out the form below the table. 
+</p>
+
+<p>
+    Players may have multiple positions that they play and will appear 
+    in this table more than once.
+</p>
+
+
+<table border="1" cellpadding="5"> 
+    {# this is code adapted from the flask starter app #}
+    {% if data %}
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        {% endfor %} 
+            </tr>
+
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+
+                    <td> {{item[key]}} </td> 
+                    {% endfor %}
+                    <td>
+                        <a href="/edit_players_position/{{item.id}}" 
+                            <button class="btn btn-info btn-sm">Edit</button>
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="/delete_players_position/{{item.id}}" onclick="return confirm('Are you sure you wish to delete?');"
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </a>
+                    </td>
+
+                </tr> 
+            {% endfor %} 
+    {% endif %}
+
+</table>
+
+<hr class="section-divider">
+
+<h4>Add new position for a player</h4>
+
+<form method="post" id="associate">
+    <label for="player_input">Player</label>
+    <select name="player_input" id="player_input">
+        {% for item in players %}
+        <option value="{{item['player_id']}}">{{item['name']}}</option> 
+        {% endfor %}
+    </select>
+
+    <label for="position_input">Position</label>
+    <select name="position_input" id="position_input">
+        {% for item in positions %}
+        <option value="{{item['position_id']}}">{{item['position']}}</option> 
+        {% endfor %}
+    </select>
+
+   <input type="submit" value="associate" name="associate"> 
+
+</form>
+
+<hr class="section-divider">
+
+{% endblock %}

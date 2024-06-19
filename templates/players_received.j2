@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Players received in trades{% endblock %}
+
+{% block content %}
+
+<h2>Players received in trades</h2>
+
+<table border="1" cellpadding="5"> 
+    {# this is code adapted from the flask starter app #}
+    <br></br>
+
+    Team 1 received Player 1 in the trade and Team 2 received Player 2.
+    <br></br>
+    If you wish to add to this table, you can do so by adding a trade on the Trades page. 
+
+    If you wish to edit or delete from this table, you can do so on the Trades page. 
+
+    {% if data %}
+        <thead>
+            <tr>
+                {% for key in data[0].keys() %}
+                <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+                        {% endfor %} 
+            </tr>
+
+        <tbody>
+            {% for item in data %}
+                <tr>
+                    {% for key in item.keys() %}
+
+                    <td> {{item[key]}} </td> 
+                    {% endfor %}
+                </tr> 
+            {% endfor %} 
+    {% endif %}
+
+</table>
+
+<hr class="section-divider">
+
+<a href="{{ url_for('views.trades') }}" >
+    <button class="btn btn-info btn-lg">Make a Trade</button>
+</a>
+<hr class="section-divider">
+
+{% endblock %}

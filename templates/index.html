@@ -1,0 +1,54 @@
+<!-- extends base html -->
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block content %}
+
+<div class="home-container">
+    <h1 class="center-heading">The Sandlot League</h1>
+    <div class="home-text-container"> 
+        <h3 class="center-heading" style="color: rgb(17, 23, 24)">Your one stop shop for everything Sandlot League related:</h3>      
+        </ul>
+        <hr class="section-divider">
+        <ul>
+            <li>Add, delete, or edit a team</li>
+            <li>Add, delete, or edit a player</li>
+            <li>Views trades and the players/teams involved in those trades</li>
+        </ul>
+    
+        <hr class="section-divider">
+
+        <h3>About our Site</h3>
+        <p>
+            This is a simple baseball themed database that allows users to keep track of the Teams
+            and Players for any local league. Each team entry will consist of a team name, mascot, and
+            a home playing field. Players information will include: name, age, the team they play for,
+            and four stat categories. These stat categories will be a ranking of a player's skill from 
+            1-10 based upon the given skill criteria (Batting, Running, Fielding, and Pitching).
+            A user can view each player's position by clicking on the so named tab on the navigation bar. 
+            If a player has multiple positions, they will be listed for every position that they play.
+        </p>
+
+        <p>
+            To prevent any confusion or duplicate names, we have added error checking for any new team or player
+            added to the database. No new player or team can be added to the database if there is already a
+            player/team with that name. 
+        </p>
+
+        <p>
+            Players can be traded to different teams for other players, and we have a section of the site 
+            where trades can be added. A trade can be added by submitting a form that includes the date, 
+            the players, and the teams involved. Additionally, there is a section that lists the players/teams
+            from all the trades in table form for easier consumption.
+        </p>
+
+        <p>
+            If for some reason a team gets a new home field, or a player decides to change their name, 
+            both teams and players have edit buttons allowing those changes to be made. If a player moves
+            to a new city and is no longer in the league, a delete button is also included to remove a player
+            from the database. The same is true for for teams.  
+        </p>
+        
+
+    </div>
+
+    <hr class="section-divider">
+{% endblock %}

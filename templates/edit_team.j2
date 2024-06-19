@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}Edit Team{% endblock %}
+
+{% block content %}
+
+
+{# this is code adapted from the flask starter app #}
+
+{% if data %}
+<form method="post" id="edit_team">
+    
+    <label for="team_name_input">Name</label>
+    <input name="team_name_input" id="team_name_input" value="{{data[0]['name']}}"required> 
+
+    <label for='mascot_input'>Mascot</label>
+    <input name='mascot_input' id="mascot_input" value="{{data[0]['mascot']}}">
+
+    <label for='home_field_input'>Home Field</label>
+    <input name='home_field_input' id="home_field_input" value="{{data[0]['home_field']}}">
+
+   <input type="submit" value="edit_team" name='edit_team'> 
+
+</form>
+
+{% endif %}
+{% endblock %}
+
+

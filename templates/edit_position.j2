@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Edit Position{% endblock %}
+
+{% block content %}
+
+{# this is code adapted from the flask starter app #}
+
+{% if data %}
+<form method="post" id="edit_position">
+    <label for="position_id_input">Position ID</label>
+    <input name="position_id_input" id="position_id_input" value="{{data[0]['position_id']}}" required > 
+
+    <label for='position_input'>Position Name</label>
+    <input name='position_input' id="position_input" value="{{data[0]['position']}}">
+
+   <input type="submit" value="Edit Position" name ='edit_position'> 
+
+</form>
+{% endif %}
+{% endblock %}

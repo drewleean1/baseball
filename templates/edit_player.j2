@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% block title %}Edit Player{% endblock %}
+
+{# this is code adapted from the flask starter app #}
+
+{% block content %}
+
+<form method="POST" id="edit_player">
+    <label for="player_name_input">Name</label>
+    <input name="player_name_input" id="player_name_input" value="{{data[0]['name']}}" required>
+
+    <label for='birthdate_input'>Birthdate</label>
+    <input type=date name='birthdate_input' id="birthdate_input" value ="{{data[0]['birthdate']}}">
+
+    <label for="batting_input">Batting</label>
+    <input type='number' min='0' max='10' name="batting_input" id="batting_input" value="{{data[0]['batting']}}"required>
+
+    <label for="running_input">Running</label>
+    <input type='number' min='0' max='10' name="running_input" id="running_input" value="{{data[0]['running']}}" required> 
+
+    <label for="fielding_input">Fielding</label>
+    <input type='number' min='0' max='10' name="fielding_input" id="fielding_input" value="{{data[0]['fielding']}}" required> 
+
+    <label for="pitching_input">Pitching</label>
+    <input type='number' min='0' max='10' name="pitching_input" id="pitching_input" value="{{data[0]['pitching']}}" required> 
+
+    <label for="team_id_input">Team</label>
+    <select name="team_id_input" id="team_id_input">
+        {% for item in teams %}
+            {% if item['name'] == data[0]['team']%} 
+                <option value="{{item['team_id']}}" selected>{{item['name']}}</option> 
+            {%else%}
+                <option value="{{item['team_id']}}">{{item['name']}}</option>
+            {%endif%}
+        {% endfor %}
+    </select>
+
+   <input type="submit" value="Edit Player" name="edit_player"> 
+
+</form>
+{% endblock %}
