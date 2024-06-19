@@ -29,7 +29,8 @@ CREATE TABLE positions (
 
 -- an intersection table that allows the M:N relationship between players and positions
 
-CREATE TABLE players_position (
+CREATE TABLE players_positions (
+	players_positions_id SERIAL PRIMARY KEY, 
 	player_id int, 
 	position_id int, 
 	FOREIGN KEY (player_id) REFERENCES players(player_id),
@@ -56,7 +57,7 @@ CREATE TABLE players_received (
 	FOREIGN KEY (player1_id) REFERENCES players(player_id),
 	FOREIGN KEY (team1_id) REFERENCES teams(team_id),
 	FOREIGN KEY (player2_id) REFERENCES players(player_id),
-	FOREIGN KEY (team_id) REFERENCES teams(team_id),
+	FOREIGN KEY (team2_id) REFERENCES teams(team_id),
 	FOREIGN KEY (trade_id) REFERENCES trades(trade_id)
 );
 
@@ -93,7 +94,7 @@ VALUES
 (9, 'Right Field');
 
 -- insert into the intersection table, player_id foreign key, and then we know what each position's id is
-INSERT INTO players_position (player_id, position_id)
+INSERT INTO players_positions (player_id, position_id)
 VALUES 
 ((SELECT player_id FROM players WHERE players.name = 'Clay'), 9),
 ((SELECT player_id FROM players WHERE players.name = 'Nestor'), 1),
